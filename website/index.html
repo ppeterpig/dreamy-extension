@@ -22,8 +22,9 @@
     overflow:hidden;
   }
 
-  /* ===== Background photos — positioned at viewport edges ===== */
-  .bg-photo{position:fixed;pointer-events:none;z-index:0}
+  /* ===== Background photos — positioned at page edges ===== */
+  .page-wrapper{position:relative;min-height:1578px;overflow:hidden}
+  .bg-photo{position:absolute;pointer-events:none;z-index:0}
   .bg-photo-1{left:0;top:0;width:355px;height:124px}
   .bg-photo-1 img{width:100%;height:100%;opacity:1;transform:rotate(10.38deg);object-fit:cover}
   .bg-photo-2{left:0;top:740px;width:165px;height:285px}
@@ -148,9 +149,16 @@
     position:relative;
   }
   .fc:hover{
+    animation:card-bounce 0.5s cubic-bezier(0.25,0.1,0.25,1);
     transform:translateY(-10px) scale(1.12);
     box-shadow:0 20px 60px rgba(255,255,255,0.12),0 8px 24px rgba(255,255,255,0.08);
     z-index:5;
+  }
+  @keyframes card-bounce{
+    0%{transform:translateY(0) scale(1)}
+    40%{transform:translateY(-14px) scale(1.12)}
+    60%{transform:translateY(-6px) scale(1.10)}
+    100%{transform:translateY(-10px) scale(1.12)}
   }
   .fc-img{width:292px;height:162px;overflow:hidden;border-radius:22px 22px 0 0;position:relative}
   .fc-img img{width:292px;height:162px;object-fit:cover;display:block}
@@ -219,6 +227,7 @@
 </style>
 </head>
 <body>
+<div class="page-wrapper">
 
 <div class="bg-photo bg-photo-1"><img src="背景图片1.png" alt=""></div>
 <div class="bg-photo bg-photo-2"><img src="背景图片2.png" alt=""></div>
@@ -231,7 +240,6 @@
       <img src="右上角头像框.png" alt="">
     </button>
     <div class="contact-card" id="cc">
-      <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-bottom:6px;letter-spacing:0.04em">联系方式</div>
       <div style="font-size:13px;color:rgba(255,255,255,0.85);line-height:1.8">WX：13192670279</div>
       <div style="height:1px;background:rgba(255,255,255,0.1);margin:8px 0"></div>
       <div style="font-size:13px;color:rgba(255,255,255,0.85);line-height:1.8">QQ：2403445400@qq.com</div>
@@ -291,5 +299,6 @@
   setTimeout(function(){document.querySelectorAll('.fc').forEach(function(c){c.style.opacity='1';c.style.transform='translateY(0)'})},300);
 })();
 </script>
+</div>
 </body>
 </html>
