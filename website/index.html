@@ -138,10 +138,15 @@
     width:292px;height:253px;flex-shrink:0;
     border:1px solid rgba(255,255,255,0.5);border-radius:24px;
     overflow:hidden;cursor:pointer;
-    transition:transform 0.35s cubic-bezier(0.25,0.1,0.25,1),box-shadow 0.35s ease;
+    transition:transform 0.4s cubic-bezier(0.25,0.1,0.25,1),box-shadow 0.4s ease,border-color 0.3s ease;
     position:relative;
   }
-  .fc:hover{transform:translateY(-6px) scale(1.10);box-shadow:0 16px 48px rgba(255,244,184,0.15)}
+  .fc:hover{
+    transform:translateY(-10px) scale(1.12);
+    box-shadow:0 20px 60px rgba(255,244,184,0.2),0 0 0 1px rgba(255,244,184,0.3);
+    border-color:rgba(255,244,184,0.5);
+    z-index:5;
+  }
   .fc-img{width:292px;height:162px;overflow:hidden;border-radius:22px 22px 0 0;position:relative}
   .fc-img img{width:292px;height:162px;object-fit:cover;display:block}
   .fc-text{
