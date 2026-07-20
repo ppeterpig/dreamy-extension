@@ -1,0 +1,51 @@
+{
+  "manifest_version": 3,
+  "name": "Dreamy 2",
+  "version": "0.1.0",
+  "description": "AI 沉浸式閱讀插件 — 文學情緒可視化",
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["icons/*.png", "icons/*.svg"],
+      "matches": ["*://weread.qq.com/*"]
+    }
+  ],
+  "host_permissions": [
+    "https://api.openai.com/*",
+    "https://api.anthropic.com/*",
+    "https://api.deepseek.com/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://weread.qq.com/*"],
+      "js": ["src/content/index.ts"],
+      "css": ["src/styles/global.css"],
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "service_worker": "src/background/index.ts"
+  },
+  "options_ui": {
+    "page": "src/options/index.html",
+    "open_in_tab": true
+  },
+  "action": {
+    "default_popup": "src/popup/index.html",
+    "default_title": "Dreamy 2",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

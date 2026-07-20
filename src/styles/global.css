@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500&family=Roboto:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500&family=Roboto:wght@300;400;500&display=swap');
+@import 'tailwindcss';
+
+/* Dreamy Box reveal animation */
+@keyframes film-develop {
+  0% {
+    opacity: 0;
+    filter: brightness(3) blur(8px) saturate(0);
+  }
+  30% {
+    opacity: 0.4;
+    filter: brightness(1.8) blur(4px) saturate(0.3);
+  }
+  60% {
+    opacity: 0.7;
+    filter: brightness(1.3) blur(1px) saturate(0.7);
+  }
+  100% {
+    opacity: 1;
+    filter: brightness(1) blur(0) saturate(1);
+  }
+}
+
+.animate-film-develop {
+  animation: film-develop 5s ease-out forwards;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.2s ease-out forwards;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spring-shake {
+  0%, 100% { transform: scale(1); }
+  25% { transform: scale(1.25); }
+  50% { transform: scale(0.9); }
+  75% { transform: scale(1.1); }
+}
+
+.animate-spring {
+  animation: spring-shake 0.4s ease-out;
+}
+
+/* Icon glow animations */
+@keyframes dreamy-glow-spin {
+  0% { border-color: rgba(255,255,255,0.15); box-shadow: 0 0 8px rgba(255,255,255,0.05); }
+  50% { border-color: rgba(255,255,255,0.35); box-shadow: 0 0 16px rgba(255,255,255,0.12); }
+  100% { border-color: rgba(255,255,255,0.15); box-shadow: 0 0 8px rgba(255,255,255,0.05); }
+}
+
+@keyframes dreamy-pulse {
+  0%, 100% { transform: scale(0.9); opacity: 0.6; }
+  50% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes dreamy-spin-ring {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes dreamy-wiggle {
+  0% { transform: rotate(0deg); }
+  20% { transform: rotate(-15deg); }
+  40% { transform: rotate(12deg); }
+  60% { transform: rotate(-8deg); }
+  80% { transform: rotate(5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* Reading trace hover expansion */
+.dreamy-reading-trace {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  box-shadow: var(--dreamy-shadow-sm);
+}
+
+.dreamy-reading-trace:hover {
+  transform: scale(1.05);
+}
+
+.dreamy-reading-trace-tooltip {
+  width: 120px;
+  border-radius: 6px;
+  object-fit: cover;
+  box-shadow: var(--dreamy-shadow-md);
+}
+
+/* Glass morphism utilities */
+.glass-bg {
+  background: var(--dreamy-glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.glass-border {
+  border: 1px solid var(--dreamy-border);
+}
+
+.glass-btn {
+  background: var(--dreamy-btn-bg);
+  border: 1px solid var(--dreamy-border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.glass-btn:hover {
+  background: var(--dreamy-btn-hover);
+}
+
+/* Dreamy container — isolate from page styles */
+#dreamy-root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  z-index: 2147483647;
+  pointer-events: none;
+}
+
+#dreamy-root > * {
+  pointer-events: auto;
+}
+
+/* Icon action buttons (close, minimize) — borderless, hover reveals circle */
+.dreamy-icon-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  border: none;
+  background: transparent;
+  color: var(--dreamy-text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  padding: 0;
+  transition: background 0.15s ease;
+}
+.dreamy-icon-btn:hover {
+  background: var(--dreamy-icon-btn-hover);
+}
+
+/* Pill-style action buttons */
+.dreamy-pill-btn {
+  font-family: "Roboto", "Noto Sans SC", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  padding: 6px 18px;
+  border-radius: 40px;
+  cursor: pointer;
+  border: 1px solid var(--dreamy-border);
+  background: var(--dreamy-input-bg);
+  color: var(--dreamy-text-primary);
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.dreamy-pill-btn:hover {
+  background: var(--dreamy-btn-hover);
+  border-color: var(--dreamy-border-strong);
+}
+
