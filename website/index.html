@@ -168,6 +168,33 @@
     .hero{padding-left:156px}
     .features{flex-wrap:wrap;justify-content:center;padding:0 48px;gap:30px}
   }
+  @media(max-width:768px){
+    .page{overflow-x:hidden}
+    .hero{
+      padding:120px 24px 0;
+      flex-direction:column;
+      height:auto;
+      min-height:auto;
+    }
+    .hero-left{gap:32px;padding-top:0;align-items:center;text-align:center}
+    .title{font-size:36px}
+    .subtitle{font-size:14px;max-width:100%}
+    .download-link{font-size:16px;padding:10px 32px}
+    .hero-visual{
+      position:relative;right:auto;top:auto;left:50%;
+      transform:scale(0.55) translateX(-50%);
+      transform-origin:top center;
+      width:997px;height:auto;
+      margin-top:-40px;margin-bottom:-80px;
+    }
+    .features{flex-direction:column;align-items:center;padding:0 24px;gap:20px;margin-top:-40px}
+    .fc{width:292px;height:253px}
+    .cat-scroll-wrap{margin-top:80px}
+    .cat-scroll-track{gap:70px}
+    .cat-scroll-track img{height:80px}
+    .avatar-wrap{right:16px;top:16px}
+    .avatar-btn{width:44px;height:44px}
+  }
 </style>
 </head>
 <body>
