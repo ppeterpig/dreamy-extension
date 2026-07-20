@@ -22,8 +22,8 @@
     overflow:hidden;
   }
 
-  /* ===== Background photos ===== */
-  .bg-photo{position:absolute;pointer-events:none;z-index:0}
+  /* ===== Background photos — positioned at viewport edges ===== */
+  .bg-photo{position:fixed;pointer-events:none;z-index:0}
   .bg-photo-1{left:0;top:0;width:355px;height:124px}
   .bg-photo-1 img{width:100%;height:100%;opacity:1;transform:rotate(10.38deg);object-fit:cover}
   .bg-photo-2{left:0;top:740px;width:165px;height:285px}
@@ -141,7 +141,7 @@
     transition:transform 0.35s cubic-bezier(0.25,0.1,0.25,1),box-shadow 0.35s ease;
     position:relative;
   }
-  .fc:hover{transform:translateY(-6px) scale(1.06);box-shadow:0 16px 48px rgba(255,244,184,0.15)}
+  .fc:hover{transform:translateY(-6px) scale(1.10);box-shadow:0 16px 48px rgba(255,244,184,0.15)}
   .fc-img{width:292px;height:162px;overflow:hidden;border-radius:22px 22px 0 0;position:relative}
   .fc-img img{width:292px;height:162px;object-fit:cover;display:block}
   .fc-text{
@@ -210,11 +210,11 @@
 </head>
 <body>
 
-<div class="page">
+<div class="bg-photo bg-photo-1"><img src="背景图片1.png" alt=""></div>
+<div class="bg-photo bg-photo-2"><img src="背景图片2.png" alt=""></div>
+<div class="bg-photo bg-photo-3"><img src="背景图片3.png" alt=""></div>
 
-  <div class="bg-photo bg-photo-1"><img src="背景图片1.png" alt=""></div>
-  <div class="bg-photo bg-photo-2"><img src="背景图片2.png" alt=""></div>
-  <div class="bg-photo bg-photo-3"><img src="背景图片3.png" alt=""></div>
+<div class="page">
 
   <div class="avatar-wrap" id="aw">
     <button class="avatar-btn" id="ab">
