@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { BookProfile, CharacterCard } from '../../shared/types';
-import { getBookProfile, saveBookProfile } from '../../shared/storage/bookProfiles';
+import { getBookProfile, saveBookProfile, deleteBookProfile } from '../../shared/storage/bookProfiles';
 import { CharacterCardEditor } from './CharacterCard';
 import { getActiveProviderConfig } from '../../shared/storage/settings';
 import { PROVIDER_PRESETS } from '../../shared/types';
@@ -23,6 +23,7 @@ export function BookPanel({ onClose }: Props) {
   const closingRef = useRef(false);
   closingRef.current = closing;
   const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null);
+  const [confirmReanalyze, setConfirmReanalyze] = useState(false);
 
   const handleClose = () => setClosing(true);
 
@@ -282,9 +283,54 @@ export function BookPanel({ onClose }: Props) {
                 {saved ? <span>已保存 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ display: 'inline', verticalAlign: 'middle' }}><path d="M2 7.5L5.5 11L12 3" stroke="var(--dreamy-success)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg></span> : '保存修改'}
               </button>
             </div>
+            <div style={{ display: 'flex', gap: 10 }}>
+              <button onClick={() => setConfirmReanalyze(true)} style={{ flex: 1, fontFamily: FONT, fontSize: 12, fontWeight: 300, padding: '8px 0', borderRadius: 40, border: `1px solid var(--dreamy-btn-hover)`, background: 'transparent', color: 'var(--dreamy-text-secondary)', cursor: 'pointer' }}>
+                重新分析
+              </button>
+            </div>
           </>
         )}
       </div>
+
+      {/* Reanalyze confirmation */}
+      <AnimatePresence>
+        {confirmReanalyze && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.94, y: 10 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.94, y: 10 }}
+            transition={{ duration: 0.22, ease: [0.4, 0, 0.2, 1] }}
+            style={{
+              position: 'absolute', bottom: 20, left: 16, right: 16,
+              padding: '20px 20px 18px',
+              background: 'var(--dreamy-bg)',
+              borderRadius: 18,
+              border: `1px solid var(--dreamy-border)`,
+              boxShadow: 'var(--dreamy-shadow-md)',
+              display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16,
+              zIndex: 10,
+            }}
+          >
+              <p style={{ fontFamily: FONT, fontSize: 13, fontWeight: 300, color: 'var(--dreamy-text-primary)', margin: 0, textAlign: 'center', lineHeight: 1.6 }}>
+                确定要重新分析「{profile?.bookName || '本书'}」吗？
+              </p>
+              <div style={{ display: 'flex', gap: 12 }}>
+                <button onClick={() => setConfirmReanalyze(false)}
+                  style={{ fontFamily: FONT, fontSize: 13, fontWeight: 300, padding: '7px 28px', borderRadius: 40, border: `1px solid var(--dreamy-btn-hover)`, background: 'var(--dreamy-btn-bg)', color: 'var(--dreamy-text-secondary)', cursor: 'pointer' }}>
+                  取消
+                </button>
+                <button onClick={async () => {
+                  setConfirmReanalyze(false);
+                  setProfile(null);
+                  try { await deleteBookProfile(); } catch {}
+                  setAnalyzing(true);
+                  setTimeout(() => window.dispatchEvent(new Event('dreamy-trigger-analysis')), 50);
+                }}
+                  style={{ fontFamily: FONT, fontSize: 13, fontWeight: 300, padding: '7px 28px', borderRadius: 40, border: `1px solid var(--dreamy-btn-hover)`, background: 'var(--dreamy-btn-bg)', color: 'var(--dreamy-text-primary)', cursor: 'pointer' }}>
+                  确认
+                </button>
+              </div>
+            </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Custom delete confirmation — card inside sidebar */}
       <AnimatePresence>
